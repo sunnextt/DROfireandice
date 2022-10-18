@@ -1,0 +1,47 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: 'GOT';
+  src: url('./fonts/Game-of-Thrones.woff') format('woff');
+}
+@font-face {
+  font-family: 'tahoma';
+  src: url('./fonts/Tahoma-Regular-font.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'tahoma';
+  src: url('./fonts/tahoma.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'tahoma';
+  src: url('./fonts/tahomabd.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'tahoma';
+  src: url('./fonts/tahomabd.ttf') format('ttf');
+}
+@font-face {
+  font-family: 'Helvetica';
+  src: url('./fonts/HelveticaNowDisplayXBlk.otf') format('otf');
+}
+
+body {
+  margin: 0;
+  font-family: 'tahoma';
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2 {
+  font-family: 'GOT';
+}
+
+h3,
+h4,
+h6,
+p {
+  font-family: 'tahoma';
+}
