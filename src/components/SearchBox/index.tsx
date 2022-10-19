@@ -32,7 +32,7 @@ const SearchBox = () => {
    };
 
    return (
-      <div className="absolute  top-4 left-[5rem] translate-x-[50%]">
+      <div className="">
          <form className="flex items-center w-[50%}" onSubmit={handleSubmit}>
             <label htmlFor="simple-search" className="sr-only">
                Search

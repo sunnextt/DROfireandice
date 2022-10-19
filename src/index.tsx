@@ -13,8 +13,9 @@ import App from './App';
 
 const queryClient = new QueryClient();
 
-export const SearchContext = createContext<any>([]);
 
+//CREATE SEARCH INTERFACE AND CHILDREN TYPE
+type TsearchInput = string;
 type Tchildren = ReactNode;
 
 export interface IsearchContext extends IsearchBox {
@@ -22,6 +23,12 @@ export interface IsearchContext extends IsearchBox {
    searchInput: TsearchInput;
    setBooks: any;
 }
+
+
+
+
+// CREATE SEARCH PROVIDER AND SEARCH CONTEXT
+export const SearchContext = createContext<any>([]);
 
 export function SearchProvider({ children }: { children: Tchildren }) {
    const [searchResults, setSearchResults] = useState();
@@ -44,7 +51,6 @@ export function SearchProvider({ children }: { children: Tchildren }) {
    );
 }
 
-type TsearchInput = string;
 
 const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement);
 root.render(

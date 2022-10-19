@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState, ReactNode, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import Layout from './components/Layout';
 import './styles/main.css';
 import Home from './view/home';
@@ -15,12 +15,10 @@ const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
    let { searchResults, searchInput, setSearchResults, setBooks } = useContext(SearchContext);
 
-   // const [books, setBooks] = useState([]);
-   // const [searchResults, setSearchResults] = useState();
-   // const [searchInput, setSearchInput] = useState<TsearchInput>('');
-
    const pageParam = 1;
 
+   // APIs CALL LOGIC TO GET json DATA THEN
+   //IMPLEMENT SEARCH
    useEffect(() => {
       async function showBooksAndCharacters() {
          const characterPromise = getCharacter(pageParam);
@@ -41,6 +39,7 @@ const App = (): JSX.Element => {
       }
 
       showBooksAndCharacters();
+      // eslint-disable-next-line react-hooks/exhaustive-deps
    }, []);
 
    //dispatch books data to store
