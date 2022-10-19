@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import _ from 'lodash';
 import getSearchResultsArray from '../../utils/getSearchResultsArray';
 import { CardProps } from '../Card/BookCard';
+import { IsearchContext, SearchContext } from '../../index';
 
-interface IsearchBox {
+export interface IsearchBox {
    books: CardProps[];
    setSearchResults: any;
    setSearchInput: any;
 }
 
-const SearchBox = ({ books, setSearchResults, setSearchInput }: IsearchBox) => {
+const SearchBox = () => {
+   let { setSearchResults, setSearchInput, books } = useContext<IsearchContext>(SearchContext);
+
    const handleSubmit = (e: { preventDefault: () => void }) => e.preventDefault();
 
    const handleSearchChange = (e: { target: { value: string } }) => {
@@ -18,7 +21,6 @@ const SearchBox = ({ books, setSearchResults, setSearchInput }: IsearchBox) => {
       const { value } = e.target;
       const searchInput = _.lowerCase(value);
       setSearchInput(searchInput);
-      
 
       const getSearchResultsprops = {
          books,
@@ -27,16 +29,15 @@ const SearchBox = ({ books, setSearchResults, setSearchInput }: IsearchBox) => {
       const newSearchResults = getSearchResultsArray(getSearchResultsprops);
 
       setSearchResults(newSearchResults);
-
    };
 
    return (
-      <div className="absolute  top-0 left-[40rem] translate-y-[40%] translate-x-[50%]">
-         <form className="flex items-center w-[15rem]" onSubmit={handleSubmit}>
+      <div className="absolute  top-4 left-[5rem] translate-x-[50%]">
+         <form className="flex items-center w-[50%}" onSubmit={handleSubmit}>
             <label htmlFor="simple-search" className="sr-only">
                Search
             </label>
-            <div className="relative w-full">
+            <div className="relative ">
                <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
                   <svg
                      aria-hidden="true"

@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import SearchBox from '../SearchBox';
 
 const navItem = [
    {
@@ -17,13 +18,12 @@ const navItem = [
 ];
 
 const Nav: React.FC = () => {
-  
    return (
       <div className="flex justify-between items-center px-8 py-4 border">
          <div>
             <h3 className="text-secondary font-bold text-3xl ">fire&Ice</h3>
          </div>
-    
+         <SearchBox />
          <nav>
             <ul className="flex gap-4">
                {navItem.map((x) => (
