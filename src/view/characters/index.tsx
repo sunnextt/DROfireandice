@@ -61,7 +61,9 @@ const Characters = () => {
             List of Characters Books by George R.R. Martin
          </h3>
          <div>
-            <div className="grid grid-cols-4 gap-8 ">{content}</div>
+            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+               {content}
+            </div>
             {error ? (
                <>
                   <div>
@@ -72,7 +74,9 @@ const Characters = () => {
                   </div>
                </>
             ) : (
-               <div className="grid grid-cols-4 gap-8 ">{content}</div>
+               <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                  {content}
+               </div>
             )}
          </div>
       </>

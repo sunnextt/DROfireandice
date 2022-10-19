@@ -19,12 +19,12 @@ const navItem = [
 
 const Nav: React.FC = () => {
    return (
-      <div className="flex justify-between items-center px-8 py-4 border">
+      <div className="relative pt-6 lg:pt-8 flex items-center justify-between px-8 py-4 border">
          <div>
             <h3 className="text-secondary font-bold text-3xl ">fire&Ice</h3>
          </div>
-         <SearchBox />
-         <nav>
+         <nav className="">
+            <SearchBox />
             <ul className="flex gap-4">
                {navItem.map((x) => (
                   <li key={x.name}>

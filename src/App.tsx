@@ -9,7 +9,7 @@ import { addBooks } from './store/slice/bookSlice';
 import { useAppDispatch } from './store/hooks';
 import { getBooks, getCharacter } from './services/api';
 import getSearchCharactersArray from './utils/getSearchCharactersArray';
-import { SearchContext } from 'src';
+import { SearchContext } from 'src/context/searchContext';
 
 const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
@@ -26,12 +26,11 @@ const App = (): JSX.Element => {
 
          const { data: characters } = await characterPromise;
 
+         // eslint-disable-next-line @typescript-eslint/no-unused-vars
          const CharactersFiterResult = getSearchCharactersArray({
             characters,
             searchInput
          });
-
-         console.log(CharactersFiterResult);
 
          const books = await booksPromise;
          setBooks(books);

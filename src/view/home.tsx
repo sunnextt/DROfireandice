@@ -9,7 +9,7 @@ const Home = ({ searchResults = [] }) => {
             <h1 className="text-4xl p-2">GAME OF THRONE</h1>
             <h5 className="p-1">A Song of Ice and Fire</h5>
             <h3 className="text-xl p-1">Books by George R.R. Martin</h3>
-            <div className="p-8">
+            <div className="px-0 py-8 sm:px-4 lg:px-8">
                <h5 className="p-2 border bg-bg">
                   New Jersey native George R.R. (Richard Raymond) Martin—or GRRM-- is best known for
                   A Song of Ice and Fire adapted to become the television series Game of Thrones.
@@ -28,7 +28,7 @@ const Home = ({ searchResults = [] }) => {
             </div>
          </div>
          <div className=" ">
-            <div className="grid grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
                {searchResults
                   ? searchResults.map((x: CardProps) => <BookCard key={x.name} cardData={x} />)
                   : 'No Data'}

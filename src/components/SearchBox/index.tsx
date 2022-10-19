@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import _ from 'lodash';
 import getSearchResultsArray from '../../utils/getSearchResultsArray';
 import { CardProps } from '../Card/BookCard';
-import { IsearchContext, SearchContext } from '../../index';
+import { IsearchContext, SearchContext } from '../../context/searchContext';
 
 export interface IsearchBox {
    books: CardProps[];
@@ -32,7 +32,7 @@ const SearchBox = () => {
    };
 
    return (
-      <div className="">
+      <div className="py-1">
          <form className="flex items-center w-[50%}" onSubmit={handleSubmit}>
             <label htmlFor="simple-search" className="sr-only">
                Search
