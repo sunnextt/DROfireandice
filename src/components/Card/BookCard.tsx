@@ -7,7 +7,7 @@ export interface CardProps {
    name: string;
    publisher: string;
    isbn: string;
-   authors: string[];
+   authors: string;
    characters: string[];
    povCharacters: string[];
    numberOfPages: Number;

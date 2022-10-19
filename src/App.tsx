@@ -8,21 +8,40 @@ import Characters from './view/characters';
 import SearchBox from './components/SearchBox';
 import { addBooks } from './store/slice/bookSlice';
 import { useAppDispatch } from './store/hooks';
-import { getBooks } from './services/api';
+import { getBooks, getCharacter } from './services/api';
+import getSearchCharactersArray from './utils/getSearchCharactersArray';
+
+type TsearchInput = string;
 
 const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
 
-   const [books, setBooks] = useState();
+   const [books, setBooks] = useState([]);
    const [searchResults, setSearchResults] = useState();
+   const [searchInput, setSearchInput] = useState<TsearchInput>('');
 
    const pageParam = 1;
 
    useEffect(() => {
-      getBooks(pageParam).then((json) => {
-         setBooks(json);
-         setSearchResults(json);
-      });
+      async function showBooksAndCharacters() {
+         const characterPromise = getCharacter(pageParam);
+         const booksPromise = getBooks(pageParam);
+
+         const { data: characters } = await characterPromise;
+
+         const CharactersFiterResult = getSearchCharactersArray({
+            characters,
+            searchInput
+         });
+
+         console.log(CharactersFiterResult);
+
+         const books = await booksPromise;
+         setBooks(books);
+         setSearchResults(books);
+      }
+
+      showBooksAndCharacters();
    }, []);
 
    //dispatch books data to store
@@ -32,7 +51,11 @@ const App = (): JSX.Element => {
 
    return (
       <div className="">
-         <SearchBox books={books} setSearchResults={setSearchResults} />
+         <SearchBox
+            books={books}
+            setSearchResults={setSearchResults}
+            setSearchInput={setSearchInput}
+         />
          <Routes>
             <Route
                path="/"

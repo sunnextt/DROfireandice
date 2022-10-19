@@ -1,26 +1,34 @@
 import React from 'react';
 import _ from 'lodash';
+import getSearchResultsArray from '../../utils/getSearchResultsArray';
+import { CardProps } from '../Card/BookCard';
 
-const SearchBox = ({ books, setSearchResults }) => {
-   const handleSubmit = (e) => e.preventDefault();
+interface IsearchBox {
+   books: CardProps[];
+   setSearchResults: any;
+   setSearchInput: any;
+}
 
-   const handleSearchChanhe = (e) => {
+const SearchBox = ({ books, setSearchResults, setSearchInput }: IsearchBox) => {
+   const handleSubmit = (e: { preventDefault: () => void }) => e.preventDefault();
+
+   const handleSearchChange = (e: { target: { value: string } }) => {
       if (!e.target.value) return setSearchResults(books);
 
       const { value } = e.target;
-      const searchinput = _.lowerCase(value);
+      const searchInput = _.lowerCase(value);
+      setSearchInput(searchInput);
+      
 
-      const resultsArray = books.filter(
-         (book) =>
-            _.lowerCase(book.name).includes(searchinput) ||
-            _.lowerCase(books.isbn).includes(searchinput)||
-            _.lowerCase(books.authors).includes(searchinput)||
-            _.lowerCase(books.publisher).includes(searchinput)
-      );
-      console.log(resultsArray);
-      setSearchResults(resultsArray);
+      const getSearchResultsprops = {
+         books,
+         searchInput
+      };
+      const newSearchResults = getSearchResultsArray(getSearchResultsprops);
+
+      setSearchResults(newSearchResults);
+
    };
-
 
    return (
       <div className="absolute  top-0 left-[40rem] translate-y-[40%] translate-x-[50%]">
@@ -49,7 +57,7 @@ const SearchBox = ({ books, setSearchResults }) => {
                   id="simple-search"
                   className="block w-full rounded-lg border border-secondary bg-sky-50 p-2.5 pl-10 text-sm text-gray-900 outline-none hover:ring hover:ring-sky-300 focus:border-sky-500 focus:ring-sky-500"
                   placeholder="Search"
-                  onChange={handleSearchChanhe}
+                  onChange={handleSearchChange}
                   required
                />
             </div>
