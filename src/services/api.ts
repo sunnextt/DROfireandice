@@ -52,16 +52,16 @@ export const booksApi = createApi({
    }
 });
 
-const getBooks = async (pageParam: Number) => {
+const getBooksApi = async (pageParam: Number) => {
    const res = await axioApi.get(`/books?page=${pageParam}&pageSize=20`);
    return res.data;
 };
 
-const getCharacter = async (pageParam: Number) => {
+const getCharactersApi = async (pageParam: Number) => {
    const res = await axioApi.get(`/characters?page=${pageParam}&pageSize=20`);
    return res;
 };
 
 const { useGetBooksQuery, useGetCharactersQuery } = booksApi;
 
-export { getCharacter, getBooks, useGetBooksQuery, useGetCharactersQuery };
+export { getBooksApi, getCharactersApi, useGetBooksQuery, useGetCharactersQuery };

@@ -5,11 +5,12 @@ import Home from './view/home';
 import { Routes, Route } from 'react-router-dom';
 import Books from './view/books/index';
 import Characters from './view/characters';
-import { addBooks } from './store/slice/bookSlice';
+// import { addBooks } from './store/slice/bookSlice';
 import { useAppDispatch } from './store/hooks';
-import { getBooks, getCharacter } from './services/api';
+import { getBooksApi, getCharactersApi } from './services/api';
 import getSearchCharactersArray from './utils/getSearchCharactersArray';
 import { SearchContext } from 'src/context/searchContext';
+import { ActionType } from './context/reducer';
 
 const App = (): JSX.Element => {
    const dispatch = useAppDispatch();
@@ -21,8 +22,8 @@ const App = (): JSX.Element => {
    //IMPLEMENT SEARCH
    useEffect(() => {
       async function showBooksAndCharacters() {
-         const characterPromise = getCharacter(pageParam);
-         const booksPromise = getBooks(pageParam);
+         const characterPromise = getCharactersApi(pageParam);
+         const booksPromise = getBooksApi(pageParam);
 
          const { data: characters } = await characterPromise;
 
@@ -43,7 +44,8 @@ const App = (): JSX.Element => {
 
    //dispatch books data to store
    useEffect(() => {
-      dispatch(addBooks(searchResults));
+      // dispatch(addBooks(searchResults));
+      dispatch({ type: ActionType.ADDBOOKS, payload: searchResults });
    }, [dispatch, searchResults]);
 
    return (
@@ -53,7 +55,7 @@ const App = (): JSX.Element => {
                path="/"
                element={
                   <Layout>
-                     <Home searchResults={searchResults} />
+                     <Home />
                   </Layout>
                }
             />
@@ -61,7 +63,7 @@ const App = (): JSX.Element => {
                path="/books"
                element={
                   <Layout>
-                     <Books searchResults={searchResults} />
+                     <Books/>
                   </Layout>
                }
             />

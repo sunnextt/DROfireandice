@@ -1,11 +1,28 @@
-import React from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
-import BookCard, { CardProps } from 'src/components/Card/BookCard';
+import BookCard from 'src/components/Card/BookCard';
+import { AppContext } from 'src/context/context';
+import { getBooksApi } from 'src/services/api';
 
-const Home = ({ searchResults = [] }) => {
+const Home = () => {
+   const { state } = useContext(AppContext);
+   const [pageParam, setPageParam] = useState(1);
+
+   const books = state.books;
+
+   useEffect(() => {
+      if (books && books.length) {
+         setPageParam((prev) => prev + 1);
+      }
+   }, [books]);
+
+   const getBooks = () => {
+      getBooksApi(pageParam);
+   };
+
    return (
-      <div>
-         <div className="flex flex-col justify-center items-center ">
+      <div className="">
+         <div className="flex flex-col justify-center items-center pt-4 ">
             <h1 className="text-4xl p-2">GAME OF THRONE</h1>
             <h5 className="p-1">A Song of Ice and Fire</h5>
             <h3 className="text-xl p-1">Books by George R.R. Martin</h3>
@@ -29,11 +46,12 @@ const Home = ({ searchResults = [] }) => {
          </div>
          <div className=" ">
             <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-               {searchResults
-                  ? searchResults.map((x: CardProps) => <BookCard key={x.name} cardData={x} />)
+               {books
+                  ? books.map((x, i) => <BookCard key={x.name} cardData={x} i={i} />)
                   : 'No Data'}
             </div>
          </div>
+         <div>{books && books.length ? <button onClick={getBooks}>Get books</button> : ''}</div>
       </div>
    );
 };
