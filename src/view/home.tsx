@@ -27,7 +27,7 @@ const Home = () => {
             <h5 className="p-1">A Song of Ice and Fire</h5>
             <h3 className="text-xl p-1">Books by George R.R. Martin</h3>
             <div className="px-0 py-8 sm:px-4 lg:px-8">
-               <h5 className="p-2 border bg-bg">
+               <h5 className="lg:p-8 sm:p-4 p-2 border bg-bg">
                   New Jersey native George R.R. (Richard Raymond) Martin—or GRRM-- is best known for
                   A Song of Ice and Fire adapted to become the television series Game of Thrones.
                   Martin has written one of each season's episodes and also serves as the series'
