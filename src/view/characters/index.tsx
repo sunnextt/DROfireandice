@@ -1,12 +1,11 @@
-import  { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { useInView } from 'react-intersection-observer';
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-
 import { useAppDispatch } from 'src/store/hooks';
 import { addCharacters } from 'src/store/slice/bookSlice';
-import { getCharacter } from 'src/services/api';
+import { getCharactersApi } from 'src/services/api';
 
 // import card component and characterProps interface
 import CharactersCard, { characterProps } from './charactersCard';
@@ -24,7 +23,7 @@ const Characters = () => {
    } = useInfiniteQuery(
       ['books'],
       async ({ pageParam = 1 }) => {
-         const res = await getCharacter(pageParam);
+         const res = await getCharactersApi(pageParam);
          return res.data;
       },
       {
@@ -40,12 +39,10 @@ const Characters = () => {
       }
    }, [fetchNextPage, hasNextPage, inView]);
 
-
    // use dispatch to save data to store
    useEffect(() => {
       dispatch(addCharacters(characters));
    }, [characters, dispatch]);
-
 
    // character card contents to render
    const content = characters?.pages.map((pg, i) => {
@@ -60,8 +57,8 @@ const Characters = () => {
          <h3 className="text-3xl font-semibold text-center my-8">
             List of Characters Books by George R.R. Martin
          </h3>
-         <div>
-            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+         <div className="">
+            <div className="py-8 grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
                {content}
             </div>
             {error ? (
@@ -74,7 +71,7 @@ const Characters = () => {
                   </div>
                </>
             ) : (
-               <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+               <div className="py-8 grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
                   {content}
                </div>
             )}

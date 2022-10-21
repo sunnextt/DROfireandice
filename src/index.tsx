@@ -9,6 +9,7 @@ import store from './store';
 import reportWebVitals from './reportWebVitals';
 import App from './App';
 import { SearchProvider } from './context/searchContext';
+import AppProvider from './context/context';
 
 const queryClient = new QueryClient();
 
@@ -16,11 +17,13 @@ const root = ReactDOM.createRoot(document.getElementById('root') as HTMLElement)
 root.render(
    <BrowserRouter>
       <Provider store={store}>
-         <SearchProvider>
-            <QueryClientProvider client={queryClient}>
-               <App />
-            </QueryClientProvider>
-         </SearchProvider>
+         <AppProvider>
+            <SearchProvider>
+               <QueryClientProvider client={queryClient}>
+                  <App />
+               </QueryClientProvider>
+            </SearchProvider>
+         </AppProvider>
       </Provider>
    </BrowserRouter>
 );

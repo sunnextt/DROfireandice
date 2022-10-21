@@ -13,6 +13,8 @@ export interface characterProps {
    id: string | number;
 }
 
+const length = 33;
+
 const CharactersCard = forwardRef(
    ({ character }: { character: characterProps }, ref: Ref<HTMLDivElement>) => {
       return (
@@ -32,11 +34,15 @@ const CharactersCard = forwardRef(
                   </li>
                   <li className="font-normal py-1">
                      father:{' '}
-                     <span className="text-secondary font-medium  ">{character.father}</span>
+                     <span className="text-secondary font-medium  ">
+                        {character.father.substring(0, length)}
+                     </span>
                   </li>
                   <li className="font-normal py-1">
                      mother:{' '}
-                     <span className="text-secondary font-medium  ">{character.mother}</span>
+                     <span className="text-secondary font-medium  ">
+                        {character.mother.substring(0, length)}
+                     </span>
                   </li>
                   <li className="font-normal py-1">
                      gender:{' '}
@@ -47,7 +53,9 @@ const CharactersCard = forwardRef(
                   </li>
                   <li className="font-normal py-1">
                      spouse:{' '}
-                     <span className="text-secondary font-medium  ">{character.spouse}</span>
+                     <span className="text-secondary font-medium  ">
+                        {character.spouse.substring(0, length)}
+                     </span>
                   </li>
                </ul>
             </div>

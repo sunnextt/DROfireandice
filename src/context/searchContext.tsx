@@ -11,8 +11,9 @@ export interface IsearchContext extends IsearchBox {
    setBooks: any;
 }
 
+const initialStavalue = {};
 // CREATE SEARCH PROVIDER AND SEARCH CONTEXT
-export const SearchContext = createContext<any>([]);
+export const SearchContext = createContext<any>(initialStavalue);
 
 export function SearchProvider({ children }: { children: Tchildren }) {
    const [searchResults, setSearchResults] = useState();

@@ -7,8 +7,6 @@ interface Ibooks {
 }
 
 function getSearchResultsArray({ books, searchInput }: Ibooks) {
-      console.log(searchInput);
-
    const resultsArray = books.filter(
       (book) =>
          _.lowerCase(book.name).includes(searchInput) ||

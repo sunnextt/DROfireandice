@@ -1,16 +1,20 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import BookCard from 'src/components/Card/BookCard';
+import { AppContext } from 'src/context/context';
 
-import BookCard, { CardProps } from 'src/components/Card/BookCard';
+const Home = () => {
+   const { state } = useContext(AppContext);
+   const { books } = state;
 
-const Home = ({ searchResults = [] }) => {
+
    return (
-      <div>
-         <div className="flex flex-col justify-center items-center ">
+      <div className="">
+         <div className="flex flex-col justify-center items-center pt-4 ">
             <h1 className="text-4xl p-2">GAME OF THRONE</h1>
             <h5 className="p-1">A Song of Ice and Fire</h5>
             <h3 className="text-xl p-1">Books by George R.R. Martin</h3>
             <div className="px-0 py-8 sm:px-4 lg:px-8">
-               <h5 className="p-2 border bg-bg">
+               <h5 className="lg:p-8 sm:p-4 p-2 border bg-bg">
                   New Jersey native George R.R. (Richard Raymond) Martin—or GRRM-- is best known for
                   A Song of Ice and Fire adapted to become the television series Game of Thrones.
                   Martin has written one of each season's episodes and also serves as the series'
@@ -28,9 +32,9 @@ const Home = ({ searchResults = [] }) => {
             </div>
          </div>
          <div className=" ">
-            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
-               {searchResults
-                  ? searchResults.map((x: CardProps) => <BookCard key={x.name} cardData={x} />)
+            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4">
+               {books
+                  ? books.map((x, i) => <BookCard key={x.name + i} cardData={x} i={i} />)
                   : 'No Data'}
             </div>
          </div>

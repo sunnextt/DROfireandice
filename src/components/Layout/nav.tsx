@@ -19,9 +19,11 @@ const navItem = [
 
 const Nav: React.FC = () => {
    return (
-      <div className="relative pt-6 lg:pt-8 flex items-center justify-between px-8 py-4 border">
+      <div className="relative pt-6 lg:pt-2 flex items-center justify-between px-8 py-2 border">
          <div>
-            <h3 className="text-secondary font-bold text-3xl ">fire&Ice</h3>
+            <h3 className="text-secondary font-bold text-3xl ">
+               <Link to='/'>fire&Ice</Link>
+            </h3>
          </div>
          <nav className="">
             <SearchBox />

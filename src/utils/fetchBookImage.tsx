@@ -40,7 +40,7 @@ const fetchBookImage = (bookName: string |undefined) => {
          imageURL = 12;
          break;
       default:
-         imageURL = null;
+         imageURL = 1;
    }
 
    return (
