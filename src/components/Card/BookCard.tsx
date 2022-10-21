@@ -29,7 +29,7 @@ const BookCard = forwardRef(
             {fetchBookImage(cardData.name)}
             <div className=" py-2 ">
                <h3 className="font-bold py-1 text-2xl text-center">{cardData.name}</h3>
-               <p className="text-center">Book #{i + 1}in the A Song of Ice and Fire Series</p>
+               <p className="text-center">Book #{i + 1} in the A Song of Ice and Fire Series</p>
                <h4 className="font-normal py-1">
                   name: <span className="text-secondary font-medium  ">{cardData.name}</span>
                </h4>
