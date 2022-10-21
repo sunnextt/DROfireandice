@@ -3,10 +3,13 @@ import type { BaseQueryFn } from '@reduxjs/toolkit/query/react';
 import axios from 'axios';
 import type { AxiosRequestConfig, AxiosError } from 'axios';
 
-const axioApi = axios.create({
+
+// AXIOS API
+export const axioApi = axios.create({
    baseURL: `https://www.anapioficeandfire.com/api/`
 });
 
+// AXIOS REDUX TOOLKIT BASEQUERY FOR REDUX API CALLS
 const axiosBaseQuery =
    (
       { baseUrl }: { baseUrl: string } = { baseUrl: '' }
@@ -35,6 +38,10 @@ const axiosBaseQuery =
       }
    };
 
+
+   // Redux tookit BASEQUERY ENDPOINT implementation
+   // For redux baseQuaery  api call
+
 export const booksApi = createApi({
    baseQuery: axiosBaseQuery({
       baseUrl: 'https://www.anapioficeandfire.com/api/'
@@ -52,6 +59,8 @@ export const booksApi = createApi({
    }
 });
 
+
+// API ENDPOINT WITH QUERY AND PAGEPARAM
 const getBooksApi = async (pageParam: Number) => {
    const res = await axioApi.get(`/books?page=${pageParam}&pageSize=20`);
    return res.data;
@@ -62,6 +71,7 @@ const getCharactersApi = async (pageParam: Number) => {
    return res;
 };
 
+//BASEQUERY ENDPOINT REDUX TOOLKITS HOOKS
 const { useGetBooksQuery, useGetCharactersQuery } = booksApi;
 
 export { getBooksApi, getCharactersApi, useGetBooksQuery, useGetCharactersQuery };

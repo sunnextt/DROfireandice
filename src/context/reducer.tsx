@@ -24,14 +24,20 @@ export type ActionMap<M extends { [index: string]: any }> = {
 
 export type BooksActions = ActionMap<IActionType>[keyof ActionMap<IActionType>];
 
-export const appReducer = (state: InitialStateType, action: IActionType | BooksActions) => {
+const appReducer = (state: InitialStateType, action: IActionType | BooksActions) => {
    const { type, payload } = action;
    switch (type) {
       case ActionType.ADDBOOKS:
-         return { ...state, payload };
+         console.log(payload);
+         return {
+            ...state,
+            books: payload
+         };
       case ActionType.ADDCHARACTERS:
          return { ...state, payload };
       default:
          return state;
    }
 };
+
+export default appReducer;

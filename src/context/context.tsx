@@ -1,5 +1,5 @@
 import { createContext, Dispatch, ReactNode, useReducer } from 'react';
-import { appReducer, BooksActions, IActionType } from './reducer';
+import appReducer, { BooksActions, IActionType } from './reducer';
 
 export interface Icharacters {
    aliases: string;

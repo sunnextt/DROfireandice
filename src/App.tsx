@@ -5,15 +5,15 @@ import Home from './view/home';
 import { Routes, Route } from 'react-router-dom';
 import Books from './view/books/index';
 import Characters from './view/characters';
-// import { addBooks } from './store/slice/bookSlice';
-import { useAppDispatch } from './store/hooks';
 import { getBooksApi, getCharactersApi } from './services/api';
 import getSearchCharactersArray from './utils/getSearchCharactersArray';
 import { SearchContext } from 'src/context/searchContext';
 import { ActionType } from './context/reducer';
+import { AppContext } from './context/context';
 
 const App = (): JSX.Element => {
-   const dispatch = useAppDispatch();
+   const { dispatch } = useContext(AppContext);
+
    let { searchResults, searchInput, setSearchResults, setBooks } = useContext(SearchContext);
 
    const pageParam = 1;
@@ -22,10 +22,9 @@ const App = (): JSX.Element => {
    //IMPLEMENT SEARCH
    useEffect(() => {
       async function showBooksAndCharacters() {
-         const characterPromise = getCharactersApi(pageParam);
-         const booksPromise = getBooksApi(pageParam);
-
-         const { data: characters } = await characterPromise;
+         const charactersResponse = await getCharactersApi(pageParam);
+         const books = await getBooksApi(pageParam);
+         const { data: characters } = charactersResponse;
 
          // eslint-disable-next-line @typescript-eslint/no-unused-vars
          const CharactersFiterResult = getSearchCharactersArray({
@@ -33,7 +32,6 @@ const App = (): JSX.Element => {
             searchInput
          });
 
-         const books = await booksPromise;
          setBooks(books);
          setSearchResults(books);
       }
@@ -44,8 +42,9 @@ const App = (): JSX.Element => {
 
    //dispatch books data to store
    useEffect(() => {
-      // dispatch(addBooks(searchResults));
-      dispatch({ type: ActionType.ADDBOOKS, payload: searchResults });
+      if (searchResults) {
+         dispatch({ type: ActionType.ADDBOOKS, payload: searchResults });
+      }
    }, [dispatch, searchResults]);
 
    return (
@@ -63,7 +62,7 @@ const App = (): JSX.Element => {
                path="/books"
                element={
                   <Layout>
-                     <Books/>
+                     <Books />
                   </Layout>
                }
             />

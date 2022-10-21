@@ -1,24 +1,11 @@
-import React, { useContext, useEffect, useState } from 'react';
-
+import React, { useContext } from 'react';
 import BookCard from 'src/components/Card/BookCard';
 import { AppContext } from 'src/context/context';
-import { getBooksApi } from 'src/services/api';
 
 const Home = () => {
    const { state } = useContext(AppContext);
-   const [pageParam, setPageParam] = useState(1);
+   const { books } = state;
 
-   const books = state.books;
-
-   useEffect(() => {
-      if (books && books.length) {
-         setPageParam((prev) => prev + 1);
-      }
-   }, [books]);
-
-   const getBooks = () => {
-      getBooksApi(pageParam);
-   };
 
    return (
       <div className="">
@@ -45,13 +32,12 @@ const Home = () => {
             </div>
          </div>
          <div className=" ">
-            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-6 lg:gap-8 sm:grid-cols-2 lg:grid-cols-4">
                {books
-                  ? books.map((x, i) => <BookCard key={x.name} cardData={x} i={i} />)
+                  ? books.map((x, i) => <BookCard key={x.name + i} cardData={x} i={i} />)
                   : 'No Data'}
             </div>
          </div>
-         <div>{books && books.length ? <button onClick={getBooks}>Get books</button> : ''}</div>
       </div>
    );
 };
